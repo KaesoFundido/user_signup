@@ -1,45 +1,35 @@
-from flask import Flask, request
-#from templates import 
+from flask import Flask, request, render_template
+import html
+
+
+
+
+
+
 app = Flask(__name__)
 app.config['DEBUG'] = True
 
 form = """
 
-<!DOCTYPE html>
-<html>
-    <body>
-        <form method="POST">
-        <label></label>
-        Username: <input type="text" name="username"/>
-        <br>
-        Password: <input type="text" name="password"/>
-        <br>
-        Password Validation: <input type="text" name="validation"/>
-        <br>
-        Email (optional): <input type="text"/>
-        <br>
-        <input type="submit" value="Submit">
-        </form>
-    </body>
-</html>
+
 
 """
 @app.route("/")
 def index():
-    return form.format('')
+    return render_template("index.html", username="", email="", error_type="", error_message="")
+@app.route("/", methods=['POST'])
+def login():
+    if request.form["password"] =="":
+        return render_template("index.html", username= request.form['username'], email= request.form['email'], error_type="bad_password", error_message="This is an invalid password")
+    else:
+        return render_template("welcome.html")
 
 @app.route("/welcome")
 
-error_message =="That is not a valid username
 
-def valid-user(username, password, validation):
-    if len(username) > 3 and len(username) < 20:
-        if character in username != '':
-            print ("Welcome, " + username) 
-        else:
-            return error_message
+def valid_user(username, password, validation):
+    return render.template("welcome.html")
 
 
-def 
-
+#hello flask and time validation code!
 app.run()

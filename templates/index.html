@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <form method="POST">
+        <label></label>
+         
+        Username: <input type="text" name="username" value="{{username}}"/>
+    
+        <br>
+        Password: <input type="text" name="password"/>
+        {% if error_type == "bad_password" %}
+            <p>{{error_message}}</p>
+        {% endif %}
+        <br>
+        Password Validation: <input type="text" name="validation"/>
+        <br>
+    
+        Email (optional): <input type="text" name="email" value="{{email}}"/>
+
+        <br>
+        <input type="submit" value="Submit">
+        </form>
+    </body>
+</html>

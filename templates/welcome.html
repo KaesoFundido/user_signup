@@ -1,0 +1,15 @@
+error_user ="That is not a valid username"
+error_password ="That is not a valid password"
+
+def valid_user(username):
+    {% if range(len(username)) is gt (3) and range(len(username)) is lt (20) %}
+        {% if character in username != " " %}
+        print("Welcome, " + username) 
+        {% else %}
+            return error_user
+        {% endif %}
+     {% endif %}   
+
+
+            
+
