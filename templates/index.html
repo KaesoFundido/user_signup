@@ -1,24 +1,84 @@
 <!DOCTYPE html>
 <html>
     <body>
+        <style>
+            .error {color: red;}
+        </style>
+        <h1>User Signup</h1>
         <form method="POST">
-        <label></label>
-         
-        Username: <input type="text" name="username" value="{{username}}"/>
-    
-        <br>
-        Password: <input type="text" name="password"/>
-        {% if error_type == "bad_password" %}
-            <p>{{error_message}}</p>
-        {% endif %}
-        <br>
-        Password Validation: <input type="text" name="validation"/>
-        <br>
-    
-        Email (optional): <input type="text" name="email" value="{{email}}"/>
-
-        <br>
-        <input type="submit" value="Submit">
+            <table>
+                <tr>
+                    <td>
+                        Username:
+                    </td> 
+                    <td>
+                        <input type="text" name="username" value="{{username}}"/>
+                        <span class='error'>
+                            {% if ispost == "POST" %}
+                                {% if username | length is lt 3 or username | length is gt 20 or ' ' is in username %}
+                                Invalid Username. Please enter a username 3-20 characters in length with no spaces.
+                                {% endif %}
+                            {% endif %}
+                        </span>
+                    </td>
+                </tr> 
+                <tr>
+                    <td>
+                        Password:
+                    </td> 
+                    <td>
+                        <input type="password" name="password"/>
+                        <span class='error'>
+                            {% if ispost == "POST" %}
+                                {% if password | length is lt 3 or username | length is gt 20 or ' ' is in password %}
+                                Invalid Password. Please enter a password 3-20 characters in length with no spaces.
+                                {% endif %}
+                            {% endif %}
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Password Validation:
+                    </td>
+                    <td>
+                        <input type="password" name="verify"/>
+                        <span class='error'>
+                            {% if ispost == "POST" %}
+                                {% if verify == '' %}
+                                    Password Validation is missing.   
+                                {% elif verify != password %}
+                                    Password and Validation do not match.
+                                {% endif %}
+                            {% endif %}
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Email (optional):
+                    </td>
+                    <td>
+                        <input type="text" name="email" value="{{email}}"/>
+                        <span class='error'>
+                            {% if ispost == "POST" %}
+                                {%if email != '' %}
+                                    {% if email | length is lt 3 or email | length is gt 20 or ' ' is in email %}
+                                        Invalid email. Please enter an email 3-20 characters in length with no spaces.
+                                    {% elif email | list | select("equalto","@") | list | count != 1 %}
+                                        Invalid email. Please enter an email 3-20 characters in length with no spaces.
+                                    {% elif email | list | select("equalto", ".") | list | count != 1 %}
+                                        Invalid email. Please enter an email 3-20 characters in length with no spaces.
+                                    {% endif %}
+                                {% endif %}
+                            {% endif %}
+                        </span>
+                    </td>
+                </tr> 
+            </table> 
+            <input type="submit" value="Submit"> 
+            
+            
         </form>
     </body>
 </html>
